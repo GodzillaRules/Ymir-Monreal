@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Referentes — Ymir Monreal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background-color: #faf9f6;
+      color: #1a1a1a;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      border-right: 0.5px solid rgba(0,0,0,0.15);
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #eceae3;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .back-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #999;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: #1a1a1a; }
+
+    .artist-name {
+      font-size: 36px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.1;
+      color: #1a1a1a;
+      text-decoration: none;
+      display: block;
+    }
+
+    .page-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-top: 1rem;
+    }
+
+    .sidebar-bottom {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 300;
+      color: #999;
+      letter-spacing: 0.08em;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 4rem;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 0.5px solid rgba(0,0,0,0.12);
+    }
+
+    .page-title {
+      font-size: 52px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1;
+    }
+
+    /* ── Lista de referentes ── */
+    .referentes-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .referente-item {
+      display: grid;
+      grid-template-columns: 120px 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+      padding: 2rem 0;
+      border-bottom: 0.5px solid rgba(0,0,0,0.1);
+    }
+
+    .referente-item:first-child {
+      border-top: 0.5px solid rgba(0,0,0,0.1);
+    }
+
+    .referente-numero {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: #ccc;
+      padding-top: 4px;
+    }
+
+    .referente-nombre {
+      font-size: 22px;
+      font-weight: 300;
+      font-style: italic;
+      color: #1a1a1a;
+      line-height: 1.2;
+    }
+
+    .referente-disciplina {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-top: 0.4rem;
+    }
+
+    .referente-descripcion {
+      font-size: 15px;
+      font-weight: 300;
+      color: #666;
+      line-height: 1.7;
+      padding-top: 4px;
+    }
+
+    /* ── Para agregar más referentes copia el bloque .referente-item ── */
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div>
+      <a class="back-link" href="index.html">← Volver</a>
+      <a class="artist-name" href="index.html">Ymir<br>Monreal</a>
+      <p class="page-label">Referentes</p>
+    </div>
+    <div class="sidebar-bottom">Multimedial — 2025</div>
+  </aside>
+
+  <main class="main-content">
+    <div class="page-header">
+      <h1 class="page-title">Referentes</h1>
+    </div>
+
+    <div class="referentes-list">
+
+      <!-- ── REFERENTE 1 ── -->
+      <div class="referente-item">
+        <span class="referente-numero">01</span>
+        <div>
+          <h2 class="referente-nombre">Nombre del artista</h2>
+          <p class="referente-disciplina">Disciplina / medio</p>
+        </div>
+        <p class="referente-descripcion">Por qué este artista es un referente para tu trabajo. Qué elementos, conceptos o estética te influencia de su práctica.</p>
+      </div>
+
+      <!-- ── REFERENTE 2 ── -->
+      <div class="referente-item">
+        <span class="referente-numero">02</span>
+        <div>
+          <h2 class="referente-nombre">Nombre del artista</h2>
+          <p class="referente-disciplina">Disciplina / medio</p>
+        </div>
+        <p class="referente-descripcion">Por qué este artista es un referente para tu trabajo. Qué elementos, conceptos o estética te influencia de su práctica.</p>
+      </div>
+
+      <!-- ── REFERENTE 3 ── -->
+      <div class="referente-item">
+        <span class="referente-numero">03</span>
+        <div>
+          <h2 class="referente-nombre">Nombre del artista</h2>
+          <p class="referente-disciplina">Disciplina / medio</p>
+        </div>
+        <p class="referente-descripcion">Por qué este artista es un referente para tu trabajo. Qué elementos, conceptos o estética te influencia de su práctica.</p>
+      </div>
+
+      <!-- ── PARA AGREGAR MÁS REFERENTES copia este bloque ──
+      <div class="referente-item">
+        <span class="referente-numero">04</span>
+        <div>
+          <h2 class="referente-nombre">Nombre</h2>
+          <p class="referente-disciplina">Disciplina</p>
+        </div>
+        <p class="referente-descripcion">Descripción.</p>
+      </div>
+      -->
+
+    </div>
+  </main>
+
+</body>
+</html>
