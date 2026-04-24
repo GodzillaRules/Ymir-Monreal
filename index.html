@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ymir Monreal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background-color: #faf9f6;
+      color: #1a1a1a;
+    }
+
+    /* ── SECCIÓN 1: Portada ── */
+    .section-portada {
+      display: flex;
+      height: 100vh;
+      align-items: stretch;
+    }
+
+    .sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      border-right: 0.5px solid rgba(0,0,0,0.15);
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #eceae3;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .artist-name {
+      font-size: 36px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.1;
+      color: #1a1a1a;
+    }
+
+    .sidebar-bottom {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 300;
+      color: #999;
+      letter-spacing: 0.08em;
+    }
+
+    .main-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 3rem;
+    }
+
+    .main-top { display: none; }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      margin-top: 2.5rem;
+    }
+
+    .nav-item {
+      border-top: 0.5px solid rgba(0,0,0,0.15);
+    }
+
+    .nav-item:last-child {
+      border-bottom: 0.5px solid rgba(0,0,0,0.15);
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 0;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #666;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover { color: #1a1a1a; }
+
+    .nav-link .arrow {
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.2s, transform 0.2s;
+      font-size: 10px;
+    }
+
+    .nav-link:hover .arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .main-center {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .placeholder-art {
+      width: 180px;
+      height: 220px;
+      border: 0.5px solid rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .placeholder-art::before {
+      content: '';
+      position: absolute;
+      top: 12px; left: 12px; right: -12px; bottom: -12px;
+      border: 0.5px solid rgba(0,0,0,0.1);
+      z-index: -1;
+    }
+
+    /* Reemplaza .placeholder-art por una imagen real:
+       <img src="img/obra.jpg" style="width:180px;height:220px;object-fit:cover;"> */
+
+    .placeholder-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: #aaa;
+      text-transform: uppercase;
+      transform: rotate(-90deg);
+      white-space: nowrap;
+    }
+
+    .main-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .tagline {
+      font-size: 14px;
+      font-weight: 300;
+      font-style: italic;
+      color: #888;
+      max-width: 200px;
+      line-height: 1.5;
+    }
+
+    .scroll-hint {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: #aaa;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .scroll-line {
+      width: 0.5px;
+      height: 32px;
+      background-color: rgba(0,0,0,0.2);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50%       { opacity: 1; }
+    }
+
+    /* ── SECCIÓN 2: Sobre mí ── */
+    .section-sobre {
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      border-top: 0.5px solid rgba(0,0,0,0.1);
+    }
+
+    .sobre-sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      border-right: 0.5px solid rgba(0,0,0,0.15);
+      padding: 3rem 2.5rem;
+      background-color: #eceae3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .sobre-sidebar-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #999;
+    }
+
+    .sobre-main {
+      flex: 1;
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .sobre-heading {
+      font-size: 52px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.05;
+      color: #1a1a1a;
+    }
+
+    .sobre-divider {
+      width: 40px;
+      height: 0.5px;
+      background-color: rgba(0,0,0,0.25);
+    }
+
+    .sobre-text {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: #444;
+      max-width: 560px;
+    }
+
+    .sobre-text p + p {
+      margin-top: 1.2rem;
+    }
+
+    .sobre-footer {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: #aaa;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Portada ── -->
+  <section class="section-portada" id="portada">
+    <aside class="sidebar">
+      <div>
+        <h1 class="artist-name">Ymir<br>Monreal</h1>
+        <nav>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a class="nav-link" href="obras.html">Obras <span class="arrow">→</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="referentes.html">Referentes <span class="arrow">→</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contacto.html">Contacto <span class="arrow">→</span></a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="sidebar-bottom">Multimedial — 2025</div>
+    </aside>
+
+    <main class="main-panel">
+      <div class="main-top"></div>
+
+      <div class="main-center">
+        <img src="img/fallen-Bridge.png" style="width:180px;height:220px;object-fit:cover;">
+      </div>
+
+      <div class="main-bottom">
+        <p class="tagline">Una exploración entre imagen, sonido y materia.</p>
+        <a class="scroll-hint" href="#sobre">
+          <div class="scroll-line"></div>
+          <span>Scroll</span>
+        </a>
+      </div>
+    </main>
+  </section>
+
+  <!-- ── Sobre mí ── -->
+  <section class="section-sobre" id="sobre">
+    <div class="sobre-sidebar">
+      <span class="sobre-sidebar-label">Sobre mí</span>
+    </div>
+
+    <div class="sobre-main">
+      <h2 class="sobre-heading">Sobre<br>mí</h2>
+      <div class="sobre-divider"></div>
+      <div class="sobre-text">
+        <!-- Reemplaza este texto por tu bio -->
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <span class="sobre-footer">Santiago, Chile</span>
+    </div>
+  </section>
+
+</body>
+</html>
