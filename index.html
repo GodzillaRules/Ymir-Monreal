@@ -8,10 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-  
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     html { scroll-behavior: smooth; }
+
     body {
       font-family: 'Cormorant Garamond', Georgia, serif;
       background-color: #faf9f6;
@@ -19,6 +20,8 @@
       display: flex;
       min-height: 100vh;
     }
+
+    /* Sidebar global sticky */
     .sidebar {
       width: 280px;
       flex-shrink: 0;
@@ -33,11 +36,13 @@
       height: 100vh;
       z-index: 10;
     }
+
     .page-content {
       flex: 1;
       overflow-y: auto;
       height: 100vh;
     }
+
     .artist-name {
       font-size: 36px;
       font-weight: 300;
@@ -45,18 +50,22 @@
       line-height: 1.1;
       color: #1a1a1a;
     }
+
     .nav-list {
       list-style: none;
       display: flex;
       flex-direction: column;
       margin-top: 2.5rem;
     }
+
     .nav-item {
       border-top: 0.5px solid rgba(0,0,0,0.15);
     }
+
     .nav-item:last-child {
       border-bottom: 0.5px solid rgba(0,0,0,0.15);
     }
+
     .nav-link {
       display: flex;
       align-items: center;
@@ -71,17 +80,21 @@
       text-decoration: none;
       transition: color 0.2s;
     }
+
     .nav-link:hover { color: #1a1a1a; }
+
     .nav-link .arrow {
       opacity: 0;
       transform: translateX(-4px);
       transition: opacity 0.2s, transform 0.2s;
       font-size: 10px;
     }
+
     .nav-link:hover .arrow {
       opacity: 1;
       transform: translateX(0);
     }
+
     .sidebar-bottom {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
@@ -89,12 +102,15 @@
       color: #999;
       letter-spacing: 0.08em;
     }
+
+    /* Panel principal con imagen de fondo */
     .main-panel {
       flex: 1;
       position: relative;
       overflow: hidden;
       height: 100%;
     }
+
     .main-panel img {
       position: absolute;
       top: 0;
@@ -103,13 +119,20 @@
       height: 100%;
       object-fit: cover;
     }
+
     .main-panel::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.55) 100%);
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.05) 0%,
+        rgba(0,0,0,0.0) 40%,
+        rgba(0,0,0,0.55) 100%
+      );
       pointer-events: none;
     }
+
     .main-bottom {
       position: absolute;
       bottom: 3rem;
@@ -120,6 +143,7 @@
       align-items: flex-end;
       z-index: 2;
     }
+
     .tagline {
       font-size: 14px;
       font-weight: 300;
@@ -129,6 +153,7 @@
       line-height: 1.5;
       text-shadow: 0 1px 4px rgba(0,0,0,0.3);
     }
+
     .scroll-hint {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
@@ -141,28 +166,35 @@
       gap: 6px;
       text-decoration: none;
     }
+
     .scroll-line {
       width: 0.5px;
       height: 32px;
       background-color: rgba(255,255,255,0.6);
       animation: scrollPulse 2s ease-in-out infinite;
     }
+
     @keyframes scrollPulse {
       0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
+      50%       { opacity: 1; }
     }
+
+    /* Sección 1: Portada */
     .section-portada {
       height: 100vh;
       position: relative;
       overflow: hidden;
       display: flex;
     }
+
+    /* Sección 2: Sobre mí */
     .section-sobre {
       min-height: 100vh;
       display: flex;
       align-items: stretch;
       border-top: 0.5px solid rgba(0,0,0,0.1);
     }
+
     .sobre-sidebar {
       width: 280px;
       flex-shrink: 0;
@@ -173,6 +205,7 @@
       flex-direction: column;
       justify-content: flex-end;
     }
+
     .sobre-sidebar-label {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
@@ -181,6 +214,7 @@
       text-transform: uppercase;
       color: #999;
     }
+
     .sobre-main {
       flex: 1;
       padding: 5rem 4rem;
@@ -189,12 +223,14 @@
       align-items: center;
       gap: 4rem;
     }
+
     .sobre-texto-col {
       flex: 1;
       display: flex;
       flex-direction: column;
       gap: 2.5rem;
     }
+
     .sobre-foto {
       width: 300px;
       flex-shrink: 0;
@@ -202,12 +238,14 @@
       overflow: hidden;
       background-color: #e8e6df;
     }
+
     .sobre-foto img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
+
     .sobre-heading {
       font-size: 52px;
       font-weight: 300;
@@ -215,11 +253,13 @@
       line-height: 1.05;
       color: #1a1a1a;
     }
+
     .sobre-divider {
       width: 40px;
       height: 0.5px;
       background-color: rgba(0,0,0,0.25);
     }
+
     .sobre-text {
       font-size: 18px;
       font-weight: 300;
@@ -227,7 +267,11 @@
       color: #444;
       max-width: 560px;
     }
-    .sobre-text p + p { margin-top: 1.2rem; }
+
+    .sobre-text p + p {
+      margin-top: 1.2rem;
+    }
+
     .sobre-footer {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
@@ -236,112 +280,14 @@
       color: #aaa;
       text-transform: uppercase;
     }
-    .section-contacto {
-      min-height: 100vh;
-      display: flex;
-      align-items: stretch;
-      border-top: 0.5px solid rgba(0,0,0,0.1);
-    }
-    .contacto-sidebar {
-      width: 280px;
-      flex-shrink: 0;
-      border-right: 0.5px solid rgba(0,0,0,0.15);
-      padding: 3rem 2.5rem;
-      background-color: #eceae3;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-    .contacto-sidebar-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      font-weight: 300;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #999;
-    }
-    .contacto-main {
-      flex: 1;
-      background-color: #faf9f6;
-      display: flex;
-      flex-direction: column;
-      padding: 4rem;
-      gap: 2rem;
-    }
-    .contacto-contenido {
-      max-width: 700px;
-      width: 100%;
-    }
-    .contacto-heading {
-      font-size: 52px;
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.05;
-      color: #1a1a1a;
-      margin-bottom: 1.5rem;
-    }
-    .contacto-divider {
-      width: 40px;
-      height: 0.5px;
-      background-color: rgba(0,0,0,0.25);
-      margin-bottom: 2rem;
-    }
-    .contacto-email {
-      font-size: 20px;
-      font-weight: 300;
-      margin-bottom: 1.5rem;
-    }
-    .contacto-email a {
-      color: #1a1a1a;
-      text-decoration: none;
-      border-bottom: 0.5px solid rgba(0,0,0,0.3);
-    }
-    .contacto-redes {
-      display: flex;
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-    .contacto-redes a {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #666;
-      text-decoration: none;
-    }
-    .contacto-redes a:hover { color: #1a1a1a; }
-    
-    .iframe-container {
-      width: 100%;
-      max-width: 900px;
-      background: #eceae3;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      margin-top: 1rem;
-    }
-    
-    .iframe-container iframe {
-      width: 100%;
-      height: 500px;
-      border: none;
-      display: block;
-    }
-    
-    .model-caption {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      color: #999;
-      margin-top: 1rem;
-    }
-    
+
     @media (max-width: 900px) {
       .sidebar { width: 220px; padding: 2rem 1.5rem; }
-      .sobre-sidebar, .contacto-sidebar { width: 220px; }
+      .sobre-sidebar { width: 220px; }
       .sobre-main { padding: 3rem 2rem; gap: 2rem; flex-direction: column; }
-      .contacto-main { padding: 3rem 2rem; }
-      .iframe-container iframe { height: 400px; }
+      .sobre-foto { width: 100%; max-width: 260px; }
     }
+
     @media (max-width: 700px) {
       body { flex-direction: column; }
       .sidebar {
@@ -358,12 +304,13 @@
       .artist-name { font-size: 28px; }
       .nav-list { flex-direction: row; gap: 1.5rem; margin-top: 0; margin-left: 2rem; }
       .nav-item { border: none; }
+      .nav-item:last-child { border: none; }
       .nav-link { padding: 0; }
       .page-content { height: auto; }
       .section-portada { height: 70vh; }
-      .sobre-sidebar, .contacto-sidebar { display: none; }
-      .sobre-main, .contacto-main { padding: 2rem 1.5rem; }
-      .iframe-container iframe { height: 350px; }
+      .sobre-sidebar { display: none; }
+      .sobre-main { padding: 2rem 1.5rem; }
+      .sobre-text { font-size: 16px; }
     }
   </style>
 </head>
@@ -374,9 +321,19 @@
       <h1 class="artist-name">Ymir<br>Monreal</h1>
       <nav>
         <ul class="nav-list">
-          <li class="nav-item"><a class="nav-link" href="obras.html">Obras <span class="arrow">→</span></a></li>
-          <li class="nav-item"><a class="nav-link" href="referentes.html">Referentes <span class="arrow">→</span></a></li>
-          <li class="nav-item"><a class="nav-link" href="#contacto">Contacto <span class="arrow">→</span></a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="obras.html">Obras <span class="arrow">→</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="referentes.html">Referentes <span class="arrow">→</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contacto.html">Contacto <span class="arrow">→</span></a>
+          </li>
+          <!-- NUEVO: Enlace debajo de Contacto -->
+          <li class="nav-item">
+            <a class="nav-link" href="https://godzillarules.github.io/gato/" target="_blank">Gato 3D <span class="arrow">→</span></a>
+          </li>
         </ul>
       </nav>
     </div>
@@ -385,6 +342,7 @@
 
   <div class="page-content">
 
+    <!-- Portada -->
     <section class="section-portada" id="portada">
       <main class="main-panel">
         <img src="img/fallen-Bridge.png" alt="Obra destacada">
@@ -398,6 +356,7 @@
       </main>
     </section>
 
+    <!-- Sobre mí -->
     <section class="section-sobre" id="sobre">
       <div class="sobre-sidebar">
         <span class="sobre-sidebar-label">Sobre mí</span>
@@ -415,32 +374,6 @@
         <div class="sobre-foto">
           <img src="img/Ymir.jpeg" alt="Ymir Monreal">
         </div>
-      </div>
-    </section>
-
-    <section class="section-contacto" id="contacto">
-      <div class="contacto-sidebar">
-        <span class="contacto-sidebar-label">Contacto</span>
-      </div>
-      <div class="contacto-main">
-        <div class="contacto-contenido">
-          <h2 class="contacto-heading">Contacto</h2>
-          <div class="contacto-divider"></div>
-          <div class="contacto-email">
-            <a href="mailto:ymir.monreal@finis.cl">ymir.monreal@finis.cl</a>
-          </div>
-          <div class="contacto-redes">
-            <a href="#" target="_blank">Instagram</a>
-            <a href="#" target="_blank">Behance</a>
-            <a href="#" target="_blank">LinkedIn</a>
-          </div>
-        </div>
-        
-        <!-- La página del gato incrustada completa - ESTO SÍ FUNCIONA -->
-        <div class="iframe-container">
-          <iframe src="https://godzillarules.github.io/gato/" title="Visor 3D de gato"></iframe>
-        </div>
-        <div class="model-caption">⋆ Interactúa con el modelo 3D — arrastra para rotar, zoom con scroll ⋆</div>
       </div>
     </section>
 
