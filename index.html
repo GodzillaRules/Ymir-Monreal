@@ -8,11 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  
+  <!-- model-viewer para macOS -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Cormorant Garamond', Georgia, serif;
       background-color: #faf9f6;
@@ -20,7 +22,6 @@
       display: flex;
       min-height: 100vh;
     }
-
     .sidebar {
       width: 280px;
       flex-shrink: 0;
@@ -35,13 +36,11 @@
       height: 100vh;
       z-index: 10;
     }
-
     .page-content {
       flex: 1;
       overflow-y: auto;
       height: 100vh;
     }
-
     .artist-name {
       font-size: 36px;
       font-weight: 300;
@@ -49,22 +48,18 @@
       line-height: 1.1;
       color: #1a1a1a;
     }
-
     .nav-list {
       list-style: none;
       display: flex;
       flex-direction: column;
       margin-top: 2.5rem;
     }
-
     .nav-item {
       border-top: 0.5px solid rgba(0,0,0,0.15);
     }
-
     .nav-item:last-child {
       border-bottom: 0.5px solid rgba(0,0,0,0.15);
     }
-
     .nav-link {
       display: flex;
       align-items: center;
@@ -79,21 +74,17 @@
       text-decoration: none;
       transition: color 0.2s;
     }
-
     .nav-link:hover { color: #1a1a1a; }
-
     .nav-link .arrow {
       opacity: 0;
       transform: translateX(-4px);
       transition: opacity 0.2s, transform 0.2s;
       font-size: 10px;
     }
-
     .nav-link:hover .arrow {
       opacity: 1;
       transform: translateX(0);
     }
-
     .sidebar-bottom {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
@@ -101,14 +92,12 @@
       color: #999;
       letter-spacing: 0.08em;
     }
-
     .main-panel {
       flex: 1;
       position: relative;
       overflow: hidden;
       height: 100%;
     }
-
     .main-panel img {
       position: absolute;
       top: 0;
@@ -117,7 +106,6 @@
       height: 100%;
       object-fit: cover;
     }
-
     .main-panel::after {
       content: '';
       position: absolute;
@@ -125,7 +113,6 @@
       background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.55) 100%);
       pointer-events: none;
     }
-
     .main-bottom {
       position: absolute;
       bottom: 3rem;
@@ -136,7 +123,6 @@
       align-items: flex-end;
       z-index: 2;
     }
-
     .tagline {
       font-size: 14px;
       font-weight: 300;
@@ -146,7 +132,6 @@
       line-height: 1.5;
       text-shadow: 0 1px 4px rgba(0,0,0,0.3);
     }
-
     .scroll-hint {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
@@ -159,33 +144,28 @@
       gap: 6px;
       text-decoration: none;
     }
-
     .scroll-line {
       width: 0.5px;
       height: 32px;
       background-color: rgba(255,255,255,0.6);
       animation: scrollPulse 2s ease-in-out infinite;
     }
-
     @keyframes scrollPulse {
       0%, 100% { opacity: 0.3; }
       50% { opacity: 1; }
     }
-
     .section-portada {
       height: 100vh;
       position: relative;
       overflow: hidden;
       display: flex;
     }
-
     .section-sobre {
       min-height: 100vh;
       display: flex;
       align-items: stretch;
       border-top: 0.5px solid rgba(0,0,0,0.1);
     }
-
     .sobre-sidebar {
       width: 280px;
       flex-shrink: 0;
@@ -196,7 +176,6 @@
       flex-direction: column;
       justify-content: flex-end;
     }
-
     .sobre-sidebar-label {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
@@ -205,7 +184,6 @@
       text-transform: uppercase;
       color: #999;
     }
-
     .sobre-main {
       flex: 1;
       padding: 5rem 4rem;
@@ -214,14 +192,12 @@
       align-items: center;
       gap: 4rem;
     }
-
     .sobre-texto-col {
       flex: 1;
       display: flex;
       flex-direction: column;
       gap: 2.5rem;
     }
-
     .sobre-foto {
       width: 300px;
       flex-shrink: 0;
@@ -229,14 +205,12 @@
       overflow: hidden;
       background-color: #e8e6df;
     }
-
     .sobre-foto img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
-
     .sobre-heading {
       font-size: 52px;
       font-weight: 300;
@@ -244,13 +218,11 @@
       line-height: 1.05;
       color: #1a1a1a;
     }
-
     .sobre-divider {
       width: 40px;
       height: 0.5px;
       background-color: rgba(0,0,0,0.25);
     }
-
     .sobre-text {
       font-size: 18px;
       font-weight: 300;
@@ -258,11 +230,7 @@
       color: #444;
       max-width: 560px;
     }
-
-    .sobre-text p + p {
-      margin-top: 1.2rem;
-    }
-
+    .sobre-text p + p { margin-top: 1.2rem; }
     .sobre-footer {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
@@ -271,15 +239,12 @@
       color: #aaa;
       text-transform: uppercase;
     }
-
-    /* Sección del Gato 3D */
     .section-gato {
       min-height: 100vh;
       display: flex;
       align-items: stretch;
       border-top: 0.5px solid rgba(0,0,0,0.1);
     }
-
     .gato-sidebar {
       width: 280px;
       flex-shrink: 0;
@@ -290,7 +255,6 @@
       flex-direction: column;
       justify-content: flex-end;
     }
-
     .gato-sidebar-label {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
@@ -299,7 +263,6 @@
       text-transform: uppercase;
       color: #999;
     }
-
     .gato-main {
       flex: 1;
       background-color: #faf9f6;
@@ -309,7 +272,6 @@
       align-items: center;
       padding: 4rem;
     }
-
     .gato-heading {
       font-size: 52px;
       font-weight: 300;
@@ -319,30 +281,28 @@
       margin-bottom: 2rem;
       text-align: center;
     }
-
     .gato-divider {
       width: 40px;
       height: 0.5px;
       background-color: rgba(0,0,0,0.25);
       margin-bottom: 2rem;
     }
-
     .gato-container {
       width: 100%;
-      max-width: 900px;
+      max-width: 800px;
       height: 500px;
       background-color: #eceae3;
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
-
-    .gato-container iframe {
+    model-viewer {
       width: 100%;
       height: 100%;
-      border: none;
+      background-color: #eceae3;
+      --progress-bar-color: #8a8a8a;
+      --progress-bar-height: 2px;
     }
-
     .gato-caption {
       font-family: 'DM Mono', monospace;
       font-size: 11px;
@@ -350,7 +310,6 @@
       margin-top: 1.5rem;
       text-align: center;
     }
-
     @media (max-width: 900px) {
       .sidebar { width: 220px; padding: 2rem 1.5rem; }
       .sobre-sidebar, .gato-sidebar { width: 220px; }
@@ -359,7 +318,6 @@
       .gato-main { padding: 3rem 2rem; }
       .gato-container { height: 400px; }
     }
-
     @media (max-width: 700px) {
       body { flex-direction: column; }
       .sidebar {
@@ -376,7 +334,6 @@
       .artist-name { font-size: 28px; }
       .nav-list { flex-direction: row; gap: 1.5rem; margin-top: 0; margin-left: 2rem; }
       .nav-item { border: none; }
-      .nav-item:last-child { border: none; }
       .nav-link { padding: 0; }
       .page-content { height: auto; }
       .section-portada { height: 70vh; }
@@ -394,15 +351,9 @@
       <h1 class="artist-name">Ymir<br>Monreal</h1>
       <nav>
         <ul class="nav-list">
-          <li class="nav-item">
-            <a class="nav-link" href="obras.html">Obras <span class="arrow">→</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="referentes.html">Referentes <span class="arrow">→</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contacto.html">Contacto <span class="arrow">→</span></a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="obras.html">Obras <span class="arrow">→</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="referentes.html">Referentes <span class="arrow">→</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto <span class="arrow">→</span></a></li>
         </ul>
       </nav>
     </div>
@@ -411,7 +362,6 @@
 
   <div class="page-content">
 
-    <!-- Portada -->
     <section class="section-portada" id="portada">
       <main class="main-panel">
         <img src="img/fallen-Bridge.png" alt="Obra destacada">
@@ -425,7 +375,6 @@
       </main>
     </section>
 
-    <!-- Sobre mí -->
     <section class="section-sobre" id="sobre">
       <div class="sobre-sidebar">
         <span class="sobre-sidebar-label">Sobre mí</span>
@@ -446,7 +395,7 @@
       </div>
     </section>
 
-    <!-- Gato 3D (debajo de Sobre mí) - SÍ se puede interactuar -->
+    <!-- Gato 3D - Versión que SÍ funciona en Mac -->
     <section class="section-gato" id="gato">
       <div class="gato-sidebar">
         <span class="gato-sidebar-label">Modelo 3D</span>
@@ -455,9 +404,22 @@
         <h2 class="gato-heading">Gato<br>interactivo</h2>
         <div class="gato-divider"></div>
         <div class="gato-container">
-          <iframe src="https://godzillarules.github.io/gato/" title="Visor 3D de gato"></iframe>
+          <model-viewer 
+            src="https://modelviewer.dev/shared-assets/models/Cat.glb"
+            alt="Gato 3D interactivo"
+            camera-controls 
+            touch-action="pan-y"
+            auto-rotate
+            rotation-per-second="30deg"
+            interaction-prompt="auto"
+            environment-image="neutral"
+            shadow-intensity="0.6"
+            exposure="1.0"
+            ar
+            ar-modes="webxr scene-viewer quick-look">
+          </model-viewer>
         </div>
-        <div class="gato-caption">⋆ Haz clic y arrastra para rotar el modelo — scroll para hacer zoom ⋆</div>
+        <div class="gato-caption">⋆ Haz clic y arrastra para rotar el gato — scroll para hacer zoom — compatible con Mac ⋆</div>
       </div>
     </section>
 
