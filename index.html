@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
   
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -266,17 +265,12 @@
       background-color: #faf9f6;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
       padding: 4rem;
-      gap: 2.5rem;
+      gap: 2rem;
     }
     .contacto-contenido {
       max-width: 700px;
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
     }
     .contacto-heading {
       font-size: 52px;
@@ -284,28 +278,28 @@
       font-style: italic;
       line-height: 1.05;
       color: #1a1a1a;
+      margin-bottom: 1.5rem;
     }
     .contacto-divider {
       width: 40px;
       height: 0.5px;
       background-color: rgba(0,0,0,0.25);
+      margin-bottom: 2rem;
     }
     .contacto-email {
       font-size: 20px;
       font-weight: 300;
-      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
     }
     .contacto-email a {
       color: #1a1a1a;
       text-decoration: none;
       border-bottom: 0.5px solid rgba(0,0,0,0.3);
-      transition: border-color 0.2s;
     }
-    .contacto-email a:hover { border-bottom-color: #1a1a1a; }
     .contacto-redes {
       display: flex;
       gap: 2rem;
-      margin-top: 1rem;
+      margin-bottom: 3rem;
     }
     .contacto-redes a {
       font-family: 'DM Mono', monospace;
@@ -314,37 +308,39 @@
       text-transform: uppercase;
       color: #666;
       text-decoration: none;
-      transition: color 0.2s;
     }
     .contacto-redes a:hover { color: #1a1a1a; }
-    .model-viewer-container {
+    
+    .iframe-container {
       width: 100%;
-      max-width: 700px;
-      background-color: #eceae3;
-      border-radius: 4px;
+      max-width: 900px;
+      background: #eceae3;
+      border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      margin-top: 1rem;
     }
-    model-viewer {
+    
+    .iframe-container iframe {
       width: 100%;
-      height: 400px;
-      background-color: #eceae3;
-      --progress-bar-color: #8a8a8a;
-      --progress-bar-height: 2px;
+      height: 500px;
+      border: none;
+      display: block;
     }
+    
     .model-caption {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
       color: #999;
-      text-align: center;
+      margin-top: 1rem;
     }
+    
     @media (max-width: 900px) {
       .sidebar { width: 220px; padding: 2rem 1.5rem; }
       .sobre-sidebar, .contacto-sidebar { width: 220px; }
       .sobre-main { padding: 3rem 2rem; gap: 2rem; flex-direction: column; }
-      .sobre-foto { width: 100%; max-width: 260px; }
       .contacto-main { padding: 3rem 2rem; }
-      model-viewer { height: 320px; }
+      .iframe-container iframe { height: 400px; }
     }
     @media (max-width: 700px) {
       body { flex-direction: column; }
@@ -367,7 +363,7 @@
       .section-portada { height: 70vh; }
       .sobre-sidebar, .contacto-sidebar { display: none; }
       .sobre-main, .contacto-main { padding: 2rem 1.5rem; }
-      model-viewer { height: 260px; }
+      .iframe-container iframe { height: 350px; }
     }
   </style>
 </head>
@@ -440,28 +436,11 @@
           </div>
         </div>
         
-        <!-- Modelo 3D - Este es un modelo de ejemplo que SÍ funciona -->
-        <!-- Para usar el tuyo, reemplaza src="..." con la URL correcta del archivo .glb -->
-        <div class="model-viewer-container">
-          <model-viewer 
-            src="https://modelviewer.dev/shared-assets/models/BrainStem.glb"
-            alt="Modelo 3D interactivo"
-            camera-controls 
-            touch-action="pan-y"
-            auto-rotate
-            rotation-per-second="20deg"
-            interaction-prompt="auto"
-            environment-image="neutral"
-            shadow-intensity="0.6"
-            exposure="1.0"
-            ar
-            ar-modes="webxr scene-viewer quick-look">
-          </model-viewer>
+        <!-- La página del gato incrustada completa - ESTO SÍ FUNCIONA -->
+        <div class="iframe-container">
+          <iframe src="https://godzillarules.github.io/gato/" title="Visor 3D de gato"></iframe>
         </div>
-        <div class="model-caption">⋆ Haz clic, arrastra para rotar — zoom con scroll — compatible con RA ⋆</div>
-        
-        <!-- INSTRUCCIÓN: Cuando encuentres la URL real del modelo .glb en https://godzillarules.github.io/gato/ -->
-        <!-- Reemplaza el src de arriba. Por ejemplo: src="https://godzillarules.github.io/gato/modelo.glb" -->
+        <div class="model-caption">⋆ Interactúa con el modelo 3D — arrastra para rotar, zoom con scroll ⋆</div>
       </div>
     </section>
 
