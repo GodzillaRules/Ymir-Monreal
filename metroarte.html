@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MetroArte — Ymir Monreal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background-color: #faf9f6;
+      color: #1a1a1a;
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      border-right: 0.5px solid rgba(0,0,0,0.15);
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #eceae3;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .back-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #999;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #1a1a1a; }
+
+    .artist-name {
+      font-size: 36px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.1;
+      color: #1a1a1a;
+      text-decoration: none;
+      display: block;
+    }
+
+    .page-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-top: 1rem;
+    }
+
+    .sidebar-bottom {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 300;
+      color: #999;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Contenido ── */
+    .main-content {
+      flex: 1;
+      padding: 4rem;
+      max-width: 900px;
+    }
+
+    .page-header {
+      margin-bottom: 4rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 0.5px solid rgba(0,0,0,0.12);
+    }
+
+    .page-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .page-title {
+      font-size: 52px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-subtitle {
+      font-size: 18px;
+      font-weight: 300;
+      color: #888;
+      font-style: italic;
+    }
+
+    /* ── Secciones ── */
+    .seccion {
+      padding: 3.5rem 0;
+      border-bottom: 0.5px solid rgba(0,0,0,0.1);
+    }
+
+    .seccion:last-child {
+      border-bottom: none;
+    }
+
+    .seccion-numero {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: #ccc;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .seccion-titulo {
+      font-size: 32px;
+      font-weight: 300;
+      font-style: italic;
+      color: #1a1a1a;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+    }
+
+    .seccion-autor {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 2rem;
+    }
+
+    /* ── Imágenes ── */
+    .img-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .img-grid.wide {
+      grid-template-columns: 2fr 1fr;
+    }
+
+    .img-wrapper {
+      overflow: hidden;
+      background-color: #e8e6df;
+      cursor: zoom-in;
+    }
+
+    .img-wrapper img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .img-wrapper:hover img {
+      transform: scale(1.02);
+    }
+
+    .img-caption {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: #aaa;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    /* ── Fichas técnicas ── */
+    .ficha {
+      display: grid;
+      grid-template-columns: 145px 1fr;
+      gap: 0.4rem 1.5rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background-color: #f0ede6;
+      border-left: 2px solid rgba(0,0,0,0.12);
+    }
+
+    .ficha-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaa;
+      padding-top: 2px;
+    }
+
+    .ficha-valor {
+      font-size: 15px;
+      font-weight: 300;
+      color: #333;
+    }
+
+    /* ── Texto ── */
+    .texto {
+      font-size: 17px;
+      font-weight: 300;
+      color: #555;
+      line-height: 1.85;
+      max-width: 68ch;
+    }
+
+    .texto p + p {
+      margin-top: 1.2rem;
+    }
+
+    /* ── Cita ── */
+    .cita {
+      margin: 2rem 0;
+      padding: 1.5rem 2rem;
+      border-left: 2px solid rgba(0,0,0,0.15);
+    }
+
+    .cita p {
+      font-size: 20px;
+      font-weight: 300;
+      font-style: italic;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .cita-fuente {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-top: 0.8rem;
+      display: block;
+    }
+
+    /* ── Tag de conexión ── */
+    .conexion {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #888;
+      background-color: #ebe9e2;
+      padding: 0.4rem 0.8rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ── Opciones de propuesta ── */
+    .opcion {
+      padding: 3.5rem 0;
+      border-bottom: 0.5px solid rgba(0,0,0,0.1);
+    }
+
+    .opcion:last-of-type { border-bottom: none; }
+
+    .opcion-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .opcion-numero {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: #ccc;
+      flex-shrink: 0;
+    }
+
+    .opcion-titulo {
+      font-size: 30px;
+      font-weight: 300;
+      font-style: italic;
+      color: #1a1a1a;
+      line-height: 1.1;
+    }
+
+    .opcion-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-top: 0.3rem;
+    }
+
+    .viz-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 0.8rem;
+    }
+
+    .viz-wrap {
+      background: #0a0a0f;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .viz-wrap .img-wrapper {
+      background-color: #0a0a0f;
+    }
+
+    .viz-wrap .img-wrapper img {
+      height: 320px;
+    }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(10,10,10,0.92);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    #lightbox.active { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+    #lightbox-close {
+      position: fixed;
+      top: 1.5rem;
+      right: 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    #lightbox-close:hover { color: rgba(255,255,255,0.9); }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div>
+      <a class="back-link" href="index.html">← Volver</a>
+      <a class="artist-name" href="index.html">Ymir<br>Monreal</a>
+      <p class="page-label">MetroArte</p>
+    </div>
+    <div class="sidebar-bottom">Multimedial — 2026</div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="page-header">
+      <span class="page-tag">Investigación</span>
+      <h1 class="page-title">MetroArte</h1>
+      <p class="page-subtitle">Obra en contexto y referente semanal</p>
+    </div>
+
+    <!-- ── PARTE 1: Constelación II ── -->
+    <div class="seccion">
+      <span class="seccion-numero">01 — Obra</span>
+      <h2 class="seccion-titulo">Constelación II</h2>
+      <p class="seccion-autor">Pablo McClure · 1994</p>
+
+      <div class="img-grid wide">
+        <div>
+          <div class="img-wrapper">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Constelaci%C3%B3n_II%2C_Pablo_McClure.jpg" alt="Constelación II, Pablo McClure">
+          </div>
+          <p class="img-caption">Constelación II — Estación Los Héroes, Santiago</p>
+        </div>
+        <div>
+          <div class="img-wrapper">
+            <img src="https://www.metro.cl/img/cultura/metro-arte/galeria/constelacion_01.jpg" alt="Detalle Constelación II">
+          </div>
+          <p class="img-caption">Detalle de la obra</p>
+        </div>
+      </div>
+
+      <div class="ficha">
+        <span class="ficha-label">Ubicación</span>
+        <span class="ficha-valor">Estación Los Héroes, Línea 1</span>
+        <span class="ficha-label">Técnica</span>
+        <span class="ficha-valor">Óleo sobre tela y espejos</span>
+        <span class="ficha-label">Superficie</span>
+        <span class="ficha-valor">380 m²</span>
+        <span class="ficha-label">Año</span>
+        <span class="ficha-valor">1994</span>
+        <span class="ficha-label">Programa</span>
+        <span class="ficha-valor">MetroArte, Metro de Santiago</span>
+      </div>
+
+      <div class="texto">
+        <p><em>Constelación II</em> es un políptico de gran escala instalado en ambos andenes de la Estación Los Héroes. La obra despliega un universo abstracto y cósmico.Líneas sinuosas, zonas sombreadas y texturas densas que en su conjunto construye una imagen de cielo que baja hacia la tierra.</p>
+        <p>El elemento más singular es la pared de espejos dispuesta frente a la pintura: los trenes, los pasajeros y el movimiento constante del metro se integran en la composición, haciendo que la obra nunca se vea exactamente igual. En sus primeros días, las personas perdían el tren por jugar con sus propios reflejos.</p>
+      </div>
+
+      <div class="cita">
+        <p>"En su obra es el cielo el que baja y se interna en la tierra y que, además, se refleja entre el vaivén de los trenes y los pasajeros."</p>
+        <span class="cita-fuente">— MetroArte, Metro de Santiago</span>
+      </div>
+    </div>
+
+    <!-- ── PARTE 2: El autor ── -->
+    <div class="seccion">
+      <span class="seccion-numero">02 - El autor</span>
+      <h2 class="seccion-titulo">Pablo McClure</h2>
+      <p class="seccion-autor">Santiago, 1955</p>
+
+      <div class="texto">
+        <p>Pintor y arquitecto chileno. Estudió pintura desde los años 70 y obtuvo el título de arquitecto en la Universidad Católica de Valparaíso (1981). En 1988 viajó a España, donde trabajó con el pintor Manuel Viola y mantuvo correspondencia con Roberto Matta, con quien compartía una sensibilidad abstracta y cósmica.</p>
+        <p>Su formación dual (arquitecto y pintor) es clave para entender <em>Constelación II</em>: hay en la obra una conciencia del espacio que va más allá del cuadro, pensada en relación directa con el lugar que la contiene y con el cuerpo de quienes la habitan.</p>
+      </div>
+    </div>
+
+    <!-- ── PARTE 3: Referente ── -->
+    <div class="seccion">
+      <span class="seccion-numero">03 — Referente</span>
+      <h2 class="seccion-titulo">Olafur Eliasson</h2>
+      <p class="seccion-autor">Copenhague, 1967 - Instalación</p>
+
+      <div class="conexion">
+        ↔ Conexión con Constelación II: luz · espejo · cuerpo del espectador como material
+      </div>
+
+      <div class="img-grid">
+        <div>
+          <div class="img-wrapper">
+            <!-- Descarga una imagen de The Weather Project y guárdala como img/eliasson-weather.jpg -->
+            <img src="img/eliasson-weather.jpg" alt="The Weather Project, Olafur Eliasson"
+              onerror="this.parentElement.style.background='#e8e6df';this.style.display='none';this.parentElement.innerHTML='<p style=\'font-family:DM Mono,monospace;font-size:10px;letter-spacing:.1em;color:#aaa;text-transform:uppercase;display:flex;align-items:center;justify-content:center;height:280px;\'>Agregar imagen</p>'">
+          </div>
+          <p class="img-caption">The Weather Project - Tate Modern, Londres, 2003</p>
+        </div>
+        <div>
+          <div class="img-wrapper">
+            <!-- Descarga una foto de Eliasson y guárdala como img/eliasson-retrato.jpg -->
+            <img src="img/eliasson-retrato.jpg" alt="Olafur Eliasson"
+              onerror="this.parentElement.style.background='#e8e6df';this.style.display='none';this.parentElement.innerHTML='<p style=\'font-family:DM Mono,monospace;font-size:10px;letter-spacing:.1em;color:#aaa;text-transform:uppercase;display:flex;align-items:center;justify-content:center;height:280px;\'>Agregar imagen</p>'">
+          </div>
+          <p class="img-caption">Olafur Eliasson</p>
+        </div>
+      </div>
+
+      <div class="texto">
+        <p>Eliasson es conocido por sus instalaciones a gran escala que usan luz, agua, temperatura y espejos para transformar la percepción del espacio. Lo que distingue su práctica es que el visitante no es espectador pasivo: es parte activa y necesaria de la obra.</p>
+        <p>En <em>The Weather Project</em> (2003), un sol artificial llenaba la Turbine Hall del Tate Modern. El techo era un espejo: la gente se tumbaba en el suelo para verse reflejada, colectivamente, bajo una luz que no existía. La mediación ocurría sin mediador, la obra creaba las condiciones y el público completaba el sentido.</p>
+        <p>Esta operación dialoga directamente con lo que McClure logra en <em>Constelación II</em>: los espejos que devuelven al pasajero su propia imagen dentro de la obra, convirtiéndolo, sin que lo busque, en parte de la composición.</p>
+      </div>
+
+      <div class="cita">
+        <p>"Lo que me interesa principalmente son las personas, las personas dentro de un espacio o espacios alrededor de personas."</p>
+        <span class="cita-fuente">— Olafur Eliasson</span>
+      </div>
+    </div>
+
+    <!-- ── PARTE 4: Propuesta ── -->
+    <div class="seccion">
+      <span class="seccion-numero">04 — Propuesta</span>
+      <h2 class="seccion-titulo">Constelación en tierra</h2>
+      <p class="seccion-autor">Dos propuestas de mediación lumínica</p>
+
+      <!-- ── OPCIÓN A ── -->
+      <div class="opcion">
+        <div class="opcion-header">
+          <span class="opcion-numero">A</span>
+          <div>
+            <h2 class="opcion-titulo">Focos sobre la obra,<br>espejos como amplificadores</h2>
+            <p class="opcion-tag">Focos LED · Espejos existentes · Luz reflejada</p>
+          </div>
+        </div>
+
+        <div class="texto">
+          <p><em>Constelación II</em> ya tiene espejos instalados frente a la pintura — parte del diseño original de McClure. La propuesta consiste en instalar focos LED de luz fría dirigidos hacia fragmentos específicos de la obra, de modo que los espejos existentes capturen esos fragmentos iluminados y los reflejen de forma amplificada hacia el andén opuesto, las columnas y los trenes que pasan.</p>
+          <p>El pasajero que camina entra sin saberlo en el campo de esos reflejos: un fragmento del cosmos de McClure aparece sobre su ropa, sobre el suelo, sobre el metal del tren. La obra sale de la pared sin que nadie la haya movido.</p>
+        </div>
+
+        <p class="viz-label">Simulación — vista del andén</p>
+        <div class="viz-wrap">
+          <div class="img-wrapper">
+            <!-- Render de la simulación generado para la Opción A -->
+            <img src="img/propuesta-a.png" alt="Simulación Opción A — focos LED de colores y espejos amplificadores"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<p style=\'font-family:DM Mono,monospace;font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.35);text-transform:uppercase;display:flex;align-items:center;justify-content:center;height:320px;margin:0;\'>Agregar imagen — Opción A</p>'">
+          </div>
+        </div>
+
+        <div class="ficha">
+          <span class="ficha-label">Materiales</span>
+          <span class="ficha-valor">3–4 focos LED de riel, luz blanca fría 4000–6000K, regulables</span>
+          <span class="ficha-label">Instalación</span>
+          <span class="ficha-valor">Riel en techo del andén, sin modificar espejos existentes</span>
+          <span class="ficha-label">Efecto</span>
+          <span class="ficha-valor">Fragmentos de la obra reflejados sobre el suelo, columnas y trenes</span>
+          <span class="ficha-label">Referente</span>
+          <span class="ficha-valor">McClure (espejos originales) + Eliasson (espectador como parte de la obra)</span>
+          <span class="ficha-label">Viabilidad</span>
+          <span class="ficha-valor">Alta — usa infraestructura existente, sin modificaciones estructurales</span>
+        </div>
+      </div>
+
+      <!-- ── OPCIÓN B ── -->
+      <div class="opcion">
+        <div class="opcion-header">
+          <span class="opcion-numero">B</span>
+          <div>
+            <h2 class="opcion-titulo">La obra viaja<br>en el tren</h2>
+            <p class="opcion-tag">Proyector · Mapeo · Superficie metálica del tren</p>
+          </div>
+        </div>
+
+        <div class="texto">
+          <p>Un proyector instalado en el techo del andén lanza fragmentos de <em>Constelación II</em> sobre el costado del tren mientras está detenido. La obra que permanece fija en la pared aparece de repente viva, moviéndose sobre la superficie metálica del vagón. Cuando el tren parte, se lleva la imagen consigo.</p>
+          <p>El pasajero que espera en el andén ve la obra proyectada frente a él sin haberla buscado. El pasajero que está dentro del tren ve desde la ventana cómo la estación desaparece con la imagen todavía encima. La obra deja de tener un lugar fijo.</p>
+        </div>
+
+        <p class="viz-label">Simulación — proyección sobre el tren</p>
+        <div class="viz-wrap">
+          <div class="img-wrapper">
+            <!-- Render de la simulación generado para la Opción B -->
+            <img src="img/propuesta-b.png" alt="Simulación Opción B — proyección sobre el tren"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<p style=\'font-family:DM Mono,monospace;font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.35);text-transform:uppercase;display:flex;align-items:center;justify-content:center;height:320px;margin:0;\'>Agregar imagen — Opción B</p>'">
+          </div>
+        </div>
+
+        <div class="ficha">
+          <span class="ficha-label">Materiales</span>
+          <span class="ficha-valor">Proyector de alta luminosidad (mín. 5000 lúmenes), soporte en techo</span>
+          <span class="ficha-label">Software</span>
+          <span class="ficha-valor">Reproducción en bucle de fragmentos digitalizados de la obra</span>
+          <span class="ficha-label">Sincronización</span>
+          <span class="ficha-valor">Sensor de llegada del tren para activar la proyección automáticamente</span>
+          <span class="ficha-label">Efecto</span>
+          <span class="ficha-valor">La obra se mueve con el tren — aparece, viaja y desaparece</span>
+          <span class="ficha-label">Referente</span>
+          <span class="ficha-valor">Eliasson (luz como materia, espectador envuelto) + Turrell (luz como escultura)</span>
+          <span class="ficha-label">Viabilidad</span>
+          <span class="ficha-valor">Media — requiere coordinación con Metro y sistema de sensores</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <span id="lightbox-close">✕ cerrar</span>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.getElementById('lightbox-close');
+
+    document.querySelectorAll('.img-wrapper img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    }
+    lightbox.addEventListener('click', closeLightbox);
+    closeBtn.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+
+</body>
+</html>
